@@ -1,0 +1,11 @@
+CREATE---------
+CREATE TABLE CUSTOMERS (
+  cust_id integer,
+  cust_lname char(10),
+  cust_fname char(10),
+  PRIMARY KEY(cust_id)
+  );
+
+
+INSERT------
+INSERT INTO CUSTOMERS VALUEs(101,'bosh', 'Basilis'),(102, 'Cantor','Chris'),(103,'Douphing','John');
