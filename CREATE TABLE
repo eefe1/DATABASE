@@ -1,0 +1,6 @@
+CREATE TABLE CUSTOMERS (
+  cust_id integer,
+  cust_lname char(10),
+  cust_fname char(10),
+  PRIMARY KEY(cust_id)
+  );
