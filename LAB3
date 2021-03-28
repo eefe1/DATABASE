@@ -1,0 +1,89 @@
+1.Add a new column in the table CUSTOMERS. 
+The column should be named cust_phone and 
+be able to store strings of maximum 12 characters.
+Display the contents of CUSTOMERS. 
+What are the values for the new column cust_phone?
+--IF WE WANT TO ADD NEW ROW WE SAY INSERT 
+--if we want to add new column ALTER
+--phone will be string
+--if we want to change the data in the row 'update
+--if we want to add new row 'insert'
+SELECT * FROM CUSTOMER
+
+ALTER TABLE CUSTOMER 
+ADD cust_phone NVARCHAR(12);
+--select,insert,update,delete
+--yukaridaki kod ile yeni colum ekledik, 
+--simdi asagida o columu doldurucaz
+
+UPDATE CUSTOMER SET cust_phone = '456'
+--bu tum rowlari etkiler,o yuzden alttakini eklicez
+WHERE cust_id = 100
+--which row olucagini belirtmemiz lazim.
+
+2. Insert the following phone numbers for the specified customers:
+cust_id cust_phone
+100 234567
+101 2524-123455 102 567987
+103 2461-123234
+
+UPDATE CUSTOMERS SET cust_phone= '234567'
+WHERE cust_id = 100
+
+UPDATE CUSTOMERS SET cust_phone= '2524-123455 102 567987'
+WHERE cust_id = '101'
+--bu sekilde quote da eklenebilir.
+
+UPDATE CUSTOMERS SET cust_phone= '2461-123234'
+WHERE cust_id = 103
+
+3. The price of televisions has been increased by 20% 
+and the price of radios by 5%.
+Update the prices in ITEMS accordingly.
+
+SELECT * FROM ITEMS
+ 
+
+UPDATE ITEMS SET item_price = item_price*1.20
+WHERE item_desc like '%TV%'-- or idem_id like '%TV%'
+
+UPDATE ITEMS SET item_price = item_price*1.05
+WHERE item_desc like 'RD%'-- or idem_id like '%TV%'
+
+
+4. Insert a new item in ITEMS (‘JJ-120’, 
+‘UNKNOWN ITEM’, 1000) and display ITEMS contents.
+ Delete the row you just added 
+ and display again the contents of ITEMS.
+
+INSERT INTO ITEMS([item_id],[item_desc],[item_price])
+VAUES ('JJ-120', 'UNKNOWN ITEM', 1000)
+
+--TO DELETE
+DELETE FROM ITEMS WHERE [item_id]='JJ-120'
+
+5. Using the keyword IN, find all the orders 
+in which the quantity of the ordered items is either 1 or 2.
+
+SELECT * FROM [dbo].[ORDERS]
+WHERE [order_qty] IN (1,2);
+--We could also use between or or 
+--but exercise precise to use IN 
+
+6. Using the keyword BETWEEN, find all the items which cost 
+less than 2500 and more than 350 ( INCLUDED).
+
+SELECT * FROM [dbo].[ITEMS]
+WHERE [item_price] BETWEEN 350 AND 2500
+
+7. Display the IDs of orders, customers and items 
+for all ORDERS 
+placed by the customer 101 having a quantity 2 or 
+more and containing 
+an item other than refrigerator
+ (i.e. does not star with ‘FR’).
+
+SELECT [dbo].[ORDERS].order_id FROM [dbo].[ORDERS]
+WHERE [dbo].[ORDERS].cust_id = 101
+AND [dbo].[ORDERS].order_qty >=2
+AND not [dbo].[ORDERS].item_id like 'FR%'
