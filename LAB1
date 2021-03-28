@@ -8,4 +8,7 @@ CREATE TABLE CUSTOMERS (
 
 
 INSERT------
-INSERT INTO CUSTOMERS VALUEs(101,'bosh', 'Basilis'),(102, 'Cantor','Chris'),(103,'Douphing','John');
+INSERT INTO CUSTOMERS VALUES
+(101,'bosh', 'Basilis'),
+(102, 'Cantor','Chris'),
+(103,'Douphing','John');
