@@ -1,14 +1,70 @@
-CREATE---------
-CREATE TABLE CUSTOMERS (
-  cust_id integer,
-  cust_lname char(10),
-  cust_fname char(10),
-  PRIMARY KEY(cust_id)
-  );
+use master
+
+IF DB_ID('MyStore') IS NOT NULL
+  drop database MyStore;
+
+create database MyStore;
+go
+use MyStore
+
+create table CUSTOMERS
+(
+ custId int  not null, 
+ custLName nvarchar(50),
+ custFName nvarchar(50),
+ PRIMARY KEY (custId)
+ );
 
 
-INSERT------
-INSERT INTO CUSTOMERS VALUES
-(101,'bosh', 'Basilis'),
-(102, 'Cantor','Chris'),
-(103,'Douphing','John');
+create table ITEMS
+( itemId char(6)   not null, 
+ itemDesc nvarchar(50), 
+ itemPrice money,
+PRIMARY KEY (itemId)
+
+ );
+
+ create table ORDERS
+ (
+	orderId integer  not null, 
+	custId integer, 
+	itemId char(6),
+	orderDate date,
+	orderQty integer,
+	PRIMARY KEY (orderId),
+	FOREIGN KEY (custId)  REFERENCES CUSTOMERS (custId),
+	FOREIGN KEY (itemId)  REFERENCES ITEMS (itemId)
+);
+
+
+--Multiple insert of data
+
+insert into customers
+(custId,  custLName, custFName) values
+ ( 100, 'Alexiadis', 'Alexis'),
+ ( 101,'Bosh', 'Basilis'),
+ ( 102,'Cantor','Chris'),
+ (103,'Douphing', 'John');
+
+
+insert into ITEMS
+(itemId,  itemDesc ,   itemPrice) values
+('FR-125', 'Refrigerator', 2500),
+('RD-100', 'Radio FM/AM',350),
+('TV-100', 'Color TV 14 inch', 1000),
+('TV-101', 'Color TV 17 inch',1200),
+('TV-102', 'Color TV 24 inch', 1300),
+('WS-350', 'Washing Machine', 3000)
+
+insert into orders
+( orderId , custId , itemId, orderDate,	orderQty) values
+(1000,101,'TV-100', '12/12/17',2),
+(1001, 103, 'TV-100', '12/13/17', 3), 
+(1002, 101, 'RD-100', '12/13/17', 1),
+(1003, 103, 'WS-350', '12/14/17', 4),
+(1004, 102, 'WS-350', '12/14/17', 6),
+(1005, 101, 'FR-125', '12/14/17', 5)
+
+ 
+
+
